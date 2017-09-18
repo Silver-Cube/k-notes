@@ -74,8 +74,6 @@ class MainActivity : AppCompatActivity() {
     fun goToUpdate(note: Note) {
         val intent = Intent(this, AddNotes::class.java)
         intent.putExtra("ID", note.id)
-        intent.putExtra("Title", note.title)
-        intent.putExtra("Description", note.description)
         startActivity(intent)
     }
 
@@ -118,14 +116,11 @@ class MainActivity : AppCompatActivity() {
             var textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
             textTitle.text = myNote.title
 
-            var textDesc: TextView = myView.findViewById(R.id.textDesc) as TextView
-            textDesc.text = myNote.description
+//            myView.findViewById(R.id.btnDelete).setOnClickListener({
+//                createAndShowAlertDialog(this.context, myNote)
+//            })
 
-            myView.findViewById(R.id.btnDelete).setOnClickListener({
-                createAndShowAlertDialog(this.context, myNote)
-            })
-
-            myView.findViewById(R.id.btnEdit).setOnClickListener({
+            myView.findViewById(R.id.ivEdit).setOnClickListener({
                 goToUpdate(myNote)
             })
 
