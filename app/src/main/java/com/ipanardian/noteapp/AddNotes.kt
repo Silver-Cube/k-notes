@@ -150,10 +150,10 @@ class AddNotes : AppCompatActivity() {
         builder.setPositiveButton(android.R.string.yes, { dialog, _ ->
             val dbManager = DbManager(this)
             val selectionArgs = arrayOf(id.toString())
-            dbManager.Delete("ID = ?", selectionArgs)
+            val isDeleted = dbManager.Delete("ID = ?", selectionArgs)
+            if (isDeleted > 0) Toast.makeText(applicationContext, "Note deleted", Toast.LENGTH_LONG).show()
             dialog.dismiss()
             finish()
-
         })
         builder.setNegativeButton(android.R.string.no, { dialog, _ ->
             dialog.cancel()

@@ -1,6 +1,5 @@
 package com.ipanardian.noteapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     inner class MyNotesAdapter(private var listNotesAdapter: ArrayList<Note>) : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val myView = layoutInflater.inflate(R.layout.ticket, parent)
+            val myView = layoutInflater.inflate(R.layout.ticket, null)
             val myNote = listNotesAdapter[position]
 
             val textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
