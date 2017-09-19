@@ -14,7 +14,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    var listNotes = ArrayList<Note>()
+    private var listNotes = ArrayList<Note>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             } while (cursor.moveToNext())
         }
 
-        var myNotesAdapter = MyNotesAdapter(this, listNotes)
+        val myNotesAdapter = MyNotesAdapter(listNotes)
 
         val listView: ListView = findViewById(R.id.lvNotes) as ListView
         listView.adapter = myNotesAdapter
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         if (item != null) {
             when (item.itemId) {
                 R.id.addNotes -> {
-                    var intent = Intent(this, AddNotes::class.java)
+                    val intent = Intent(this, AddNotes::class.java)
                     startActivity(intent)
                 }
             }
@@ -83,20 +83,12 @@ class MainActivity : AppCompatActivity() {
         LoadQuery("%")
     }
 
-    inner class MyNotesAdapter: BaseAdapter {
-        var context: Context? = null
-        var listNotesAdapter = ArrayList<Note>()
-
-        constructor(context: Context, listNotesAdapter: ArrayList<Note>): super() {
-            this.context = context
-            this.listNotesAdapter = listNotesAdapter
-        }
-
+    inner class MyNotesAdapter(private var listNotesAdapter: ArrayList<Note>) : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var myView = layoutInflater.inflate(R.layout.ticket, null)
-            var myNote = listNotesAdapter[position]
+            val myView = layoutInflater.inflate(R.layout.ticket, parent)
+            val myNote = listNotesAdapter[position]
 
-            var textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
+            val textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
             textTitle.text = myNote.title
 
             myView.findViewById(R.id.ivEdit).setOnClickListener({
@@ -106,17 +98,11 @@ class MainActivity : AppCompatActivity() {
             return myView
         }
 
-        override fun getItem(position: Int): Any {
-            return listNotesAdapter[position]
-        }
+        override fun getItem(position: Int): Any = listNotesAdapter[position]
 
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
+        override fun getItemId(position: Int): Long = position.toLong()
 
-        override fun getCount(): Int {
-            return listNotesAdapter.size
-        }
+        override fun getCount(): Int = listNotesAdapter.size
 
     }
 }
