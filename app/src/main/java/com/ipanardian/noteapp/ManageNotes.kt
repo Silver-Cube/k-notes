@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
-class AddNotes : AppCompatActivity() {
+class ManageNotes : AppCompatActivity() {
 
     var id: Int = 0
     var etTitle: EditText? = null
@@ -20,7 +20,7 @@ class AddNotes : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_notes)
+        setContentView(R.layout.activity_manage_notes)
 
         etTitle = findViewById(R.id.etTitle) as EditText
         etDescription = findViewById(R.id.etDes) as EditText

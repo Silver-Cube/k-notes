@@ -2,6 +2,7 @@ package com.ipanardian.noteapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val fabAddNote = findViewById(R.id.fabAddNote) as FloatingActionButton
+        fabAddNote.setOnClickListener { _ ->
+            this.goToAdd()
+        }
 
         LoadQuery("%")
     }
@@ -51,28 +57,13 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = myNotesAdapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(
-                R.menu.main_menu,
-                menu
-        )
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item != null) {
-            when (item.itemId) {
-                R.id.addNotes -> {
-                    val intent = Intent(this, AddNotes::class.java)
-                    startActivity(intent)
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
+    fun goToAdd() {
+        val intent = Intent(this, ManageNotes::class.java)
+        startActivity(intent)
     }
 
     fun goToUpdate(note: Note) {
-        val intent = Intent(this, AddNotes::class.java)
+        val intent = Intent(this, ManageNotes::class.java)
         intent.putExtra("ID", note.id)
         startActivity(intent)
     }
@@ -84,13 +75,13 @@ class MainActivity : AppCompatActivity() {
 
     inner class MyNotesAdapter(private var listNotesAdapter: ArrayList<Note>) : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val myView = layoutInflater.inflate(R.layout.ticket, null)
+            val myView = layoutInflater.inflate(R.layout.note, null)
             val myNote = listNotesAdapter[position]
 
             val textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
             textTitle.text = myNote.title
 
-            myView.findViewById(R.id.ivEdit).setOnClickListener({
+            myView.findViewById(R.id.lyNote).setOnClickListener({
                 goToUpdate(myNote)
             })
 
