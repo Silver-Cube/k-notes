@@ -5,4 +5,7 @@
     <string name="title">Title</string>
     <string name="add">Add Notes</string>
     <string name="description">We are in code freeze and this issue tracker is no longer actively monitored. I\'ll be closing PR that do not</string>
+    <string name="save">Save</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="enter_title">Enter Title</string>
 </resources>

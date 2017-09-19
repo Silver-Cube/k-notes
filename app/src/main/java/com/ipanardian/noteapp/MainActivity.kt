@@ -2,14 +2,15 @@ package com.ipanardian.noteapp
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.ListView
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,24 +83,6 @@ class MainActivity : AppCompatActivity() {
         LoadQuery("%")
     }
 
-    fun createAndShowAlertDialog(context: Context?, note: Note) {
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
-        builder.setTitle("Confirm Delete")
-        builder.setMessage("Are you sure want to delete this note?")
-        builder.setPositiveButton(android.R.string.yes, { dialog, which ->
-            var dbManager = DbManager(context!!)
-            val selectionArgs = arrayOf(note.id.toString())
-            dbManager.Delete("ID = ?", selectionArgs)
-            LoadQuery("%")
-            dialog.dismiss()
-        })
-        builder.setNegativeButton(android.R.string.no, { dialog, which ->
-            dialog.cancel()
-        })
-        val alert: AlertDialog = builder.create()
-        alert.show()
-    }
-
     inner class MyNotesAdapter: BaseAdapter {
         var context: Context? = null
         var listNotesAdapter = ArrayList<Note>()
@@ -115,10 +98,6 @@ class MainActivity : AppCompatActivity() {
 
             var textTitle: TextView = myView.findViewById(R.id.textTitle) as TextView
             textTitle.text = myNote.title
-
-//            myView.findViewById(R.id.btnDelete).setOnClickListener({
-//                createAndShowAlertDialog(this.context, myNote)
-//            })
 
             myView.findViewById(R.id.ivEdit).setOnClickListener({
                 goToUpdate(myNote)

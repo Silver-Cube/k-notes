@@ -2,17 +2,21 @@ package com.ipanardian.noteapp
 
 import android.content.ContentValues
 import android.database.Cursor
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 
+@Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
 class AddNotes : AppCompatActivity() {
 
     var id: Int = 0
     var etTitle: EditText? = null
     var etDescription: EditText? = null
+    var hideDeleteMenu = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +26,10 @@ class AddNotes : AppCompatActivity() {
         etDescription = findViewById(R.id.etDes) as EditText
 
         if (intent.hasExtra("ID")) {
-            var bundle: Bundle = intent.extras
+            val bundle: Bundle = intent.extras
             id = bundle.getInt("ID")
             if (id != 0) {
-                var note: Note? = this.getNote(id)
+                val note: Note? = this.getNote(id)
 
                 if (note != null) {
                     etTitle?.setText(note.title)
@@ -33,7 +37,35 @@ class AddNotes : AppCompatActivity() {
                 }
             }
         }
+        else {
+            hideDeleteMenu = true
+            invalidateOptionsMenu()
+        }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(
+                R.menu.manage_menu,
+                menu
+        )
+        if (hideDeleteMenu) {
+            val deleteNote: MenuItem? = menu?.findItem(R.id.deleteNote)
+            deleteNote?.isVisible = false
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item != null) when (item.itemId) {
+            R.id.saveNote -> {
+                this.saveAction()
+            }
+            R.id.deleteNote -> {
+                this.deleteAction(id)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getNote(id: Int?): Note? {
@@ -68,9 +100,9 @@ class AddNotes : AppCompatActivity() {
         return note
     }
 
-    fun saveAction(view: View) {
-        var dbManager = DbManager(this)
-        var values = ContentValues()
+    fun saveAction() {
+        val dbManager = DbManager(this)
+        val values = ContentValues()
 
         if (etTitle?.text.toString().equals("")) {
             etTitle?.requestFocus()
@@ -109,5 +141,24 @@ class AddNotes : AppCompatActivity() {
         }
 
         finish()
+    }
+
+    fun deleteAction(id: Int?) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm Delete")
+        builder.setMessage("Are you sure want to delete this note?")
+        builder.setPositiveButton(android.R.string.yes, { dialog, _ ->
+            val dbManager = DbManager(this)
+            val selectionArgs = arrayOf(id.toString())
+            dbManager.Delete("ID = ?", selectionArgs)
+            dialog.dismiss()
+            finish()
+
+        })
+        builder.setNegativeButton(android.R.string.no, { dialog, _ ->
+            dialog.cancel()
+        })
+        val alert: AlertDialog = builder.create()
+        alert.show()
     }
 }
