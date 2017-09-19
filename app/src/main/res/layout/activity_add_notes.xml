@@ -10,8 +10,10 @@
 
     <EditText
         android:id="@+id/etTitle"
-        android:layout_width="318dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_title"
@@ -23,9 +25,11 @@
 
     <EditText
         android:id="@+id/etDes"
-        android:layout_width="318dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:autoLink="web|email|phone|map"
         android:ems="10"
         android:hint="@string/enter_description"
