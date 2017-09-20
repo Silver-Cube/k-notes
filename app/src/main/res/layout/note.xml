@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorGray"
+    android:background="@color/colorSmoothGray"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/lyNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0pt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/background_layout"
         android:clickable="true"
         android:orientation="horizontal">

@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToUpdate(note: Note) {
-        val intent = Intent(this, ManageNotes::class.java)
+    fun goToView(note: Note) {
+        val intent = Intent(this, ViewNotes::class.java)
         intent.putExtra("ID", note.id)
         startActivity(intent)
     }
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             textTitle.text = myNote.title
 
             myView.findViewById(R.id.lyNote).setOnClickListener({
-                goToUpdate(myNote)
+                goToView(myNote)
             })
 
             return myView

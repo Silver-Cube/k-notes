@@ -16,8 +16,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAddNote"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="25dp"
         android:clickable="true"
