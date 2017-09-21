@@ -1,4 +1,4 @@
-package com.ipanardian.noteapp
+package com.ipanardian.knotes
 
 /**
  * Created by ipan on 9/15/17.

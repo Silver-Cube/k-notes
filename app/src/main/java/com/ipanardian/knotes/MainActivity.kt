@@ -1,11 +1,9 @@
-package com.ipanardian.noteapp
+package com.ipanardian.knotes
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -68,8 +66,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    override fun onResume() {
+        super.onResume()
         LoadQuery("%")
     }
 

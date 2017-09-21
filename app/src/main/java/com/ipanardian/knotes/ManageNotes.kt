@@ -1,4 +1,4 @@
-package com.ipanardian.noteapp
+package com.ipanardian.knotes
 
 import android.content.ContentValues
 import android.database.Cursor

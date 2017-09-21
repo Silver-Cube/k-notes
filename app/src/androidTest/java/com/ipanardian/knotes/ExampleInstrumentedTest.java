@@ -1,4 +1,4 @@
-package com.ipanardian.noteapp;
+package com.ipanardian.knotes;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
