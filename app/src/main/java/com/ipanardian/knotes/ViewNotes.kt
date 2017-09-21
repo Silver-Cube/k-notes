@@ -1,4 +1,4 @@
-package com.ipanardian.noteapp
+package com.ipanardian.knotes
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
