@@ -97,13 +97,13 @@ class ViewNotes : AppCompatActivity() {
         return note
     }
 
-    fun goToUpdate(note: Note) {
+    private fun goToUpdate(note: Note) {
         val intent = Intent(this, ManageNotes::class.java)
         intent.putExtra("ID", note.id)
         startActivity(intent)
     }
 
-    fun deleteAction(id: Int?) {
+    private fun deleteAction(id: Int?) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setTitle("Confirm Delete")
         builder.setMessage("Are you sure want to delete this note?")

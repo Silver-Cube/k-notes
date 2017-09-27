@@ -95,7 +95,7 @@ class ManageNotes : AppCompatActivity() {
         return note
     }
 
-    fun saveAction() {
+    private fun saveAction() {
         val dbManager = DbManager(this)
         val values = ContentValues()
 

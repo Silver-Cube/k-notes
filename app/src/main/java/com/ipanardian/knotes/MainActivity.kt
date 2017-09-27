@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = myNotesAdapter
     }
 
-    fun goToAdd() {
+    private fun goToAdd() {
         val intent = Intent(this, ManageNotes::class.java)
         startActivity(intent)
     }
