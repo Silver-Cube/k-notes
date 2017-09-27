@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/addNotes"
-        android:icon="@drawable/ic_note_add_white_24dp"
-        android:title="@string/add"
+        android:id="@+id/searchMenu"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@android:string/search_go"
         app:showAsAction="ifRoom" />
 </menu>

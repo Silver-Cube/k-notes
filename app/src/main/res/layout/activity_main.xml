@@ -19,7 +19,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="25dp"
+        android:layout_margin="20dp"
         android:clickable="true"
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_note_add_white_24dp" />
