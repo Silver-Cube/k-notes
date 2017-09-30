@@ -5,8 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -68,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item != null) when (item.itemId) {
+            R.id.aboutMenu -> aboutDialog()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     fun LoadQuery(title: String ) {
         val dbManager = DbManager(this)
         val projections = arrayOf("ID", "Title", "Description")
@@ -111,6 +123,26 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         LoadQuery("%")
+    }
+
+    private fun aboutDialog() {
+        var aboutContent = SpannableString("k-Notes v0.1.0\n" +
+                "This app is open source project\n\n" +
+                "Web: http://ipanardian.com\n" +
+                "Github: https://github.com/ipanardian/k-notes")
+        Linkify.addLinks(aboutContent, Linkify.WEB_URLS)
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.about)
+        builder.setMessage(aboutContent)
+        builder.setPositiveButton(android.R.string.yes, { dialog, _ ->
+            dialog.dismiss()
+        })
+        val alert: AlertDialog = builder.create()
+        alert.show()
+
+        var textView = alert.findViewById(android.R.id.message) as TextView
+        textView.movementMethod = LinkMovementMethod.getInstance()
     }
 
     inner class MyNotesAdapter(private var listNotesAdapter: ArrayList<Note>) : BaseAdapter() {

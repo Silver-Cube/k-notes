@@ -8,4 +8,5 @@
     <string name="save">Save</string>
     <string name="enter_description">Enter Description</string>
     <string name="enter_title">Enter Title</string>
+    <string name="about">About</string>
 </resources>
